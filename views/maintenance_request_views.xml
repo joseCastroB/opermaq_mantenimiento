@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_maintenance_request_form_inherit_opermaq" model="ir.ui.view">
+        <field name="name">maintenance.request.form.inherit.opermaq</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <field name="opermaq_orden_compra_id" options="{'no_create': True}"/>
+
+                <field name="opermaq_tipo_preventivo"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
