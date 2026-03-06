@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_opermaq_estado_gantt_list" model="ir.ui.view">
+        <field name="name">opermaq.estado.gantt.list</field>
+        <field name="model">opermaq.estado.gantt</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="color_hex" widget="color"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_opermaq_estado_gantt" model="ir.actions.act_window">
+        <field name="name">Estados de Planificación (Gantt)</field>
+        <field name="res_model">opermaq.estado.gantt</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_opermaq_estado_gantt" 
+              name="Estados de Planificación" 
+              parent="maintenance.menu_maintenance_configuration" 
+              action="action_opermaq_estado_gantt" 
+              sequence="110"/>
+</odoo>

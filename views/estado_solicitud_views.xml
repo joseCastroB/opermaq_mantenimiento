@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_opermaq_estado_solicitud_timeline" model="ir.ui.view">
+        <field name="name">opermaq.estado.solicitud.timeline</field>
+        <field name="model">opermaq.estado.solicitud</field>
+        <field name="arch" type="xml">
+            <timeline date_start="fecha_inicio" date_stop="fecha_fin" default_group_by="request_id" event_open_popup="true" title="name">
+                <field name="name"/>
+                <field name="request_id"/>
+                <field name="estado_gantt_id"/>
+                <field name="color_gantt_hex"/>
+                <templates>
+                    <t t-name="timeline-item">
+                        <div t-attf-style="background-color: #{record.color_gantt_hex || '#00A09D'}; color: #ffffff; font-weight: bold; margin: -10px; padding: 6px 10px; border-radius: 3px; display: block; box-sizing: border-box; height: 100%;">         
+                            <t t-esc="record.estado_gantt_id[1]"/>            
+                        </div>
+                    </t>
+                </templates>
+            </timeline>
+        </field>
+    </record>
+
+    <record id="view_opermaq_estado_solicitud_form" model="ir.ui.view">
+        <field name="name">opermaq.estado.solicitud.form</field>
+        <field name="model">opermaq.estado.solicitud</field>
+        <field name="arch" type="xml">
+            <form string="Asignar Estado">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vista_actual" invisible="1"/>
+                            <field name="request_id" domain="[('opermaq_tipo_preventivo', '=', vista_actual)]"/>
+                            <field name="equipment_id"/>
+                            <field name="estado_gantt_id"/>
+                        </group>
+                        <group>
+                            <field name="fecha_inicio"/>
+                            <field name="fecha_fin"/>
+                            <field name="horometro"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_opermaq_estado_solicitud_list_cliente" model="ir.ui.view">
+        <field name="name">opermaq.estado.solicitud.list.cliente</field>
+        <field name="model">opermaq.estado.solicitud</field>
+        <field name="arch" type="xml">
+            <list string="Estados Cliente">
+                <field name="request_id" string="Solicitud"/>
+                <field name="cliente_id" string="Nombre del Cliente"/>
+                <field name="ubicacion"/>
+                <field name="equipment_id" string="Equipo"/>
+                <field name="serie"/>
+                <field name="modelo"/>
+                <field name="opermaq_orden_compra_id"/>
+                <field name="horometro" optional="show"/>
+                <field name="estado_gantt_id"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_opermaq_estado_solicitud_list_propio" model="ir.ui.view">
+        <field name="name">opermaq.estado.solicitud.list.propio</field>
+        <field name="model">opermaq.estado.solicitud</field>
+        <field name="arch" type="xml">
+            <list string="Estados Propio">
+                <field name="request_id" string="Solicitud"/>
+                <field name="opermaq_estado_equipo_id" string="Estado del Equipo"/>
+                <field name="estado_gantt_id" string="Estado en Gantt"/>
+                <field name="cliente_id" string="Nombre del Cliente"/>
+                <field name="ubicacion"/>
+                <field name="equipment_id" string="Equipo"/>
+                <field name="serie"/>
+                <field name="modelo"/>
+                <field name="horometro" optional="show"/>
+                <field name="fecha_inicio"/>
+                <field name="fecha_fin"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_opermaq_estado_solicitud_search" model="ir.ui.view">
+        <field name="name">opermaq.estado.solicitud.search</field>
+        <field name="model">opermaq.estado.solicitud</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Planificación">
+                <field name="request_id" string="Solicitud"/>
+                <field name="equipment_id" string="Equipo"/>
+                <field name="estado_gantt_id" string="Estado"/>
+
+                <separator/>
+                
+                <filter string="Fecha de Inicio" name="filtro_fecha_inicio" date="fecha_inicio"/>
+                
+                <group expand="0" string="Agrupar por">
+                    <filter string="Equipo" name="group_equipo" context="{'group_by': 'equipment_id'}"/>
+                    <filter string="Estado" name="group_estado" context="{'group_by': 'estado_gantt_id'}"/>
+                    
+                    <filter string="Fecha de Inicio" name="group_fecha" context="{'group_by': 'fecha_inicio'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_opermaq_gantt_cliente" model="ir.actions.act_window">
+        <field name="name">Gantt Cliente</field>
+        <field name="res_model">opermaq.estado.solicitud</field>
+        <field name="view_mode">timeline,list,form</field>
+        <field name="domain">[('tipo_preventivo', '=', 'cliente')]</field>
+        <field name="context">{'default_vista_actual': 'cliente'}</field> 
+    </record>
+
+    <record id="action_opermaq_gantt_propio" model="ir.actions.act_window">
+        <field name="name">Gantt Propio</field>
+        <field name="res_model">opermaq.estado.solicitud</field>
+        <field name="view_mode">timeline,list,form</field>
+        <field name="domain">[('tipo_preventivo', '=', 'propio')]</field>
+        <field name="context">{'default_vista_actual': 'propio'}</field>
+    </record>
+
+    <record id="action_view_timeline_cliente" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">timeline</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_timeline"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_cliente"/>
+    </record>
+    <record id="action_view_list_cliente" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_list_cliente"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_cliente"/>
+    </record>
+    <record id="action_view_form_cliente" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_form"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_cliente"/>
+    </record>
+
+    <record id="action_view_timeline_propio" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">timeline</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_timeline"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_propio"/>
+    </record>
+    <record id="action_view_list_propio" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_list_propio"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_propio"/>
+    </record>
+    <record id="action_view_form_propio" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_opermaq_estado_solicitud_form"/>
+        <field name="act_window_id" ref="action_opermaq_gantt_propio"/>
+    </record>
+
+    <menuitem id="menu_opermaq_organizador" name="Organizador" parent="maintenance.menu_maintenance_title" sequence="2"/>
+    <menuitem id="menu_opermaq_gantt_cliente" name="Gantt Cliente" parent="menu_opermaq_organizador" action="action_opermaq_gantt_cliente" sequence="10"/>
+    <menuitem id="menu_opermaq_gantt_propio" name="Gantt Propio" parent="menu_opermaq_organizador" action="action_opermaq_gantt_propio" sequence="20"/>
+
+</odoo>

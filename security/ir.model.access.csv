@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_opermaq_estado_equipo_user,opermaq.estado.equipo.user,model_opermaq_estado_equipo,base.group_user,1,1,1,1
+access_opermaq_estado_solicitud,opermaq.estado.solicitud,model_opermaq_estado_solicitud,base.group_user,1,1,1,1
+access_opermaq_estado_gantt,opermaq.estado.gantt,model_opermaq_estado_gantt,base.group_user,1,1,1,1
