@@ -11,6 +11,12 @@
                 <field name="opermaq_estado_equipo_id"/>
             </xpath>
             
+            <xpath expr="//field[@name='effective_date']" position="before">
+                <field name="maquina"/>
+                <field name="marca"/>
+                <field name="medida_ruedas"/>
+            </xpath>
+
         </field>
     </record>
 </odoo>

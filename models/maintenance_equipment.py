@@ -22,3 +22,7 @@ class MaintenaceEquipment(models.Model):
         string='Estado de Equipo',
         help='Selecciona o crea un estado para este equipo.'
     )
+
+    maquina = fields.Char(string='Máquina')
+    marca = fields.Char(string='Marca')
+    medida_ruedas = fields.Char(string='Medida de Ruedas')
