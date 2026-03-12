@@ -17,6 +17,10 @@
                 <field name="medida_ruedas"/>
             </xpath>
 
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="alias"/>
+            </xpath>
+
         </field>
     </record>
 </odoo>

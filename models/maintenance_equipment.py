@@ -26,3 +26,5 @@ class MaintenaceEquipment(models.Model):
     maquina = fields.Char(string='Máquina')
     marca = fields.Char(string='Marca')
     medida_ruedas = fields.Char(string='Medida de Ruedas')
+
+    alias = fields.Char(string='Alias')
