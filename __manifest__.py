@@ -3,7 +3,7 @@
     'version': '1.0',
     'summary': 'Personalizaciones de mantenimiento para Opermaq',
     'category': 'Maintenance',
-    'depends': ['maintenance', 'purchase', 'web_timeline'], 
+    'depends': ['maintenance', 'purchase', 'web_timeline', 'sale_management'], 
     'data': [
         'security/ir.model.access.csv',
         'views/maintenance_equipment_views.xml',

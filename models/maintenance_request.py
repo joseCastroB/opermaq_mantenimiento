@@ -14,9 +14,10 @@ class MaintenanceRequest(models.Model):
     )
 
     opermaq_orden_compra_id = fields.Many2one(
-        comodel_name='purchase.order',
+        comodel_name='sale.order',
         string='Orden de Compra',
-        help='Selecciona la orden de compra relacionada a este mantenimiento.'
+        domain="[('state', 'in', ['draft', 'sent', 'sale'])]", # Solo muestra cotizaciones en borrador o enviadas
+        help='Selecciona la solicitud de cotización de venta relacionada a este mantenimiento.'
     )
 
     opermaq_tipo_preventivo = fields.Selection(
