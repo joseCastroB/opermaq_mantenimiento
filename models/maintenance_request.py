@@ -6,6 +6,8 @@ class MaintenanceRequest(models.Model):
 
     name = fields.Char(default='Autogenerado al guardar...', required=False, readonly=True)
 
+    titulo = fields.Char(string='Título', tracking=True)
+
     equipment_id = fields.Many2one(
         'maintenance.equipment',
         string='Equipo',

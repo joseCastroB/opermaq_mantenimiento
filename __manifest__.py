@@ -9,7 +9,8 @@
         'views/maintenance_equipment_views.xml',
         'views/maintenance_request_views.xml',
         'views/estado_gantt_views.xml',
-        'views/estado_solicitud_views.xml'
+        'views/estado_solicitud_views.xml',
+        'views/maintenance_request_kanban_views.xml'
     ],
     'installable': True,
     'application': False,

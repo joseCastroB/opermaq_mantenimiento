@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_opermaq_maintenance_request_kanban_inherit" model="ir.ui.view">
+        <field name="name">maintenance.request.kanban.inherit.opermaq</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_kanban"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//kanban" position="inside">
+                <field name="titulo"/>
+                <field name="maintenance_type"/>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="after">
+                
+                <div class="mt-2 p-2 rounded" style="background-color: #f0f4f8; border-left: 3px solid #007bff;">
+                    
+                    <div class="fw-bold text-truncate" style="font-size: 13px; color: #333;">
+                        <i class="fa fa-tag me-1 text-primary"/>
+                        <t t-if="record.titulo.raw_value">
+                            <field name="titulo"/>
+                        </t>
+                        <t t-else="">
+                            <span class="text-muted fst-italic fw-normal">Sin título asignado</span>
+                        </t>
+                    </div>
+
+                    <div class="mt-1">
+                        <t t-if="record.maintenance_type.raw_value == 'corrective'">
+                            <span class="badge text-bg-danger rounded-pill px-2 py-1" style="font-size: 11px;">
+                                <i class="fa fa-wrench me-1"/> Correctivo
+                            </span>
+                        </t>
+                        <t t-elif="record.maintenance_type.raw_value == 'preventive'">
+                            <span class="badge text-bg-info rounded-pill px-2 py-1" style="font-size: 11px;">
+                                <i class="fa fa-calendar-check me-1"/> Preventivo
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span class="badge text-bg-secondary rounded-pill px-2 py-1" style="font-size: 11px;">
+                                <field name="maintenance_type"/>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
