@@ -21,6 +21,36 @@
                 <field name="alias"/>
             </xpath>
 
+            <xpath expr="//notebook" position="inside">
+                <page string="Características">
+                    <group>
+                        <group>
+                            <field name="fecha_compra"/>
+                            <field name="ano_fabricacion"/>
+                            <field name="temperatura_trabajo"/>
+                            <field name="peso"/>
+                        </group>
+                        <group>
+                            <field name="componentes"/>
+                            <field name="tipo_rueda"/>
+                            <field name="altura_elevacion"/>
+                            <field name="capacidad_carga"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_opermaq_maintenance_equipment_tree_inherit" model="ir.ui.view">
+        <field name="name">opermaq.maintenance.equipment.tree.inherit</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="maquina" optional="show"/>
+            </xpath>
         </field>
     </record>
 </odoo>

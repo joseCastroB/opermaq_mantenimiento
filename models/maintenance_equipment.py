@@ -28,3 +28,16 @@ class MaintenaceEquipment(models.Model):
     medida_ruedas = fields.Char(string='Medida de Ruedas')
 
     alias = fields.Char(string='Alias')
+
+    # ==========================================
+    # SECCIÓN: CARACTERÍSTICAS TÉCNICAS
+    # ==========================================
+
+    fecha_compra = fields.Date(string='Fecha compra')
+    ano_fabricacion = fields.Integer(string='Año de fabricación')
+    temperatura_trabajo = fields.Char(string='Temperatura de trabajo')
+    peso = fields.Char(string='Peso')
+    componentes = fields.Char(string='Componentes')
+    tipo_rueda = fields.Char(string='Tipo de rueda')
+    altura_elevacion = fields.Char(string='Altura de elevación')
+    capacidad_carga = fields.Char(string='Capacidad de carga')
